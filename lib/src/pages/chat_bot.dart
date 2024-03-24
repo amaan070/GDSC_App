@@ -2,8 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:google_generative_ai/google_generative_ai.dart';
 
 class ChatScreen extends StatelessWidget {
-  final apiKey = 'AIzaSyCr9LnuKX6qj-BOvA_5ZoWlst-5PqaAOUs';
-
   const ChatScreen({super.key});
 
   @override
