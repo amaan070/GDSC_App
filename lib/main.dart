@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:gdsc_app/src/features/splash/screens/splash_screen.dart';
+import 'package:gdsc_app/src/auth/splash_screen.dart';
 import 'package:firebase_core/firebase_core.dart';
-import 'src/firebase/firebase_options.dart';
+import 'package:gdsc_app/src/theme/dark_theme.dart';
+import 'package:gdsc_app/src/theme/theme_changer.dart';
+import 'package:provider/provider.dart';
+import 'src/services/firebase/firebase_options.dart';
 import 'package:gdsc_app/src/theme/theme.dart';
 
 void main() async {
@@ -18,11 +21,18 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Flutter Demo',
-      themeMode: ThemeMode.system,
-      theme: defaultTheme,
-      home: const Splash(),
+    return MultiProvider(
+      providers: [ChangeNotifierProvider(create: (_) => ThemeChanger())],
+      child: Builder(builder: ((context) {
+        final themeChanger = Provider.of<ThemeChanger>(context);
+        return MaterialApp(
+          title: 'Flutter Demo',
+          themeMode: themeChanger.themeMode,
+          theme: defaultTheme,
+          darkTheme: darkTheme,
+          home: const Splash(),
+        );
+      })),
     );
   }
 }

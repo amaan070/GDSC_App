@@ -1,23 +1,17 @@
 import 'package:flutter/material.dart';
-import 'package:gdsc_app/src/utils/colors.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-ThemeData defaultTheme = ThemeData(
-    colorScheme: const ColorScheme.light(
-      primary: Colors.black,
-      secondary: themeBackgroundPeach,
-      background: themeBackgroundWhite,
-    ),
-    brightness: Brightness.light,
+ThemeData darkTheme = ThemeData(
+    colorScheme: const ColorScheme.dark(
+        background: Color.fromARGB(255, 1, 5, 43),
+        primary: Colors.white,
+        secondary: Color.fromARGB(255, 48, 48, 48)),
+    brightness: Brightness.dark,
     textTheme: TextTheme(
       displayLarge: GoogleFonts.exo2(
-          fontSize: 30,
-          fontWeight: FontWeight.bold,
-          color: const Color.fromARGB(225, 0, 0, 0)),
+          fontSize: 30, fontWeight: FontWeight.bold, color: Colors.white),
       displaySmall: GoogleFonts.exo2(
-          fontSize: 15,
-          fontWeight: FontWeight.bold,
-          color: const Color.fromARGB(225, 0, 0, 0)),
+          fontSize: 15, fontWeight: FontWeight.bold, color: Colors.white),
       labelSmall: const TextStyle(fontStyle: FontStyle.italic, fontSize: 13),
     ),
     elevatedButtonTheme: ElevatedButtonThemeData(
@@ -29,14 +23,10 @@ ThemeData defaultTheme = ThemeData(
               RoundedRectangleBorder(borderRadius: BorderRadius.circular(5)),
             ),
             backgroundColor: MaterialStateProperty.all<Color>(
-              colorPrimary,
+              Colors.grey[100]!,
             ),
             foregroundColor: MaterialStateProperty.all<Color>(
-              Colors.white,
-            ),
-            side: MaterialStateProperty.all<BorderSide>(
-              const BorderSide(color: Color.fromARGB(172, 0, 0, 0)),
-            ))),
+                const Color.fromARGB(255, 1, 5, 43)))),
     outlinedButtonTheme: OutlinedButtonThemeData(
         style: ButtonStyle(
       padding: MaterialStateProperty.all<EdgeInsetsGeometry>(
@@ -46,15 +36,15 @@ ThemeData defaultTheme = ThemeData(
         RoundedRectangleBorder(borderRadius: BorderRadius.circular(5)),
       ),
       foregroundColor: MaterialStateProperty.all<Color>(
-        colorPrimary,
+        Colors.grey[100]!,
       ),
       side: MaterialStateProperty.all<BorderSide>(
-        const BorderSide(color: Color.fromARGB(172, 0, 0, 0)),
+        BorderSide(color: Colors.grey[800]!),
       ),
     )),
     textButtonTheme: TextButtonThemeData(
         style: ButtonStyle(
       foregroundColor: MaterialStateProperty.all<Color>(
-        Colors.black,
+        Colors.grey[100]!,
       ),
     )));
