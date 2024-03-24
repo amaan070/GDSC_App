@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:url_launcher/url_launcher.dart';
+import 'package:gdsc_app/src/pages/team.dart';
 
 class AboutUsPage extends StatelessWidget {
   const AboutUsPage({super.key});
@@ -85,6 +86,33 @@ class AboutUsPage extends StatelessWidget {
                       context),
                   _buildBulletText('GDG / GDE expert talks', context),
                 ],
+              ),
+              const SizedBox(height: 20.0),
+              Text(
+                'GDSC Team',
+                style: Theme.of(context).textTheme.displayLarge,
+              ),
+              const SizedBox(height: 10.0),
+              ListView.builder(
+                shrinkWrap: true,
+                itemCount: TeamPage().teamMembers.length,
+                itemBuilder: (context, index) {
+                  // Extract team member details
+                  final member = TeamPage().teamMembers[index];
+                  return ListTile(
+                    trailing: GestureDetector(
+                        onTap: () {
+                          openAppWebView(member.connectLink);
+                        },
+                        child: Text('Connect',
+                            style: Theme.of(context).textTheme.displaySmall)),
+                    leading: CircleAvatar(
+                      backgroundImage: NetworkImage(member.imageUrl),
+                    ),
+                    title: Text(member.name),
+                    subtitle: Text(member.position),
+                  );
+                },
               ),
               const SizedBox(height: 20.0),
               Text(

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:gdsc_app/src/pages/about.dart';
+import 'package:gdsc_app/src/pages/chat_bot.dart';
 import 'package:gdsc_app/src/pages/events.dart';
 import 'package:gdsc_app/src/pages/home.dart';
 import 'package:gdsc_app/src/pages/profile_page.dart';
@@ -21,8 +22,8 @@ class _BottomNavigatorState extends State<BottomNavigator> {
     ),
     const EventsPage(),
     const AboutUsPage(),
-    TeamPage(),
-    const ProfilePage()
+    const ChatScreen(),
+    const ProfilePage(),
   ];
 
   @override
@@ -61,7 +62,7 @@ class _BottomNavigatorState extends State<BottomNavigator> {
                   backgroundColor: Colors.transparent),
               BottomNavigationBarItem(
                   icon: Icon(
-                    FontAwesomeIcons.peopleGroup,
+                    FontAwesomeIcons.message,
                     color: Theme.of(context).colorScheme.primary,
                   ),
                   label: '',

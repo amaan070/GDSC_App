@@ -1,7 +1,6 @@
-import 'package:flutter/material.dart';
-import 'package:url_launcher/url_launcher.dart';
-
 // Define a data model for team members
+import 'package:flutter/material.dart';
+
 class TeamMember {
   final String name;
   final String position;
@@ -231,55 +230,8 @@ class TeamPage extends StatelessWidget {
 
   TeamPage({super.key});
 
-  Future openAppWebView(String url) async {
-    if (!await launchUrl(Uri.parse(url),
-        mode: LaunchMode.externalApplication)) {
-      throw Exception('Invalid Link');
-    }
-  }
-
   @override
   Widget build(BuildContext context) {
-    return PopScope(
-      canPop: false,
-      child: Scaffold(
-        backgroundColor: Theme.of(context).colorScheme.background,
-        appBar: AppBar(
-          backgroundColor: Theme.of(context).colorScheme.background,
-          leading: const Icon(Icons.pages),
-          title: Text(
-            'GDSC Team',
-            style: Theme.of(context).textTheme.displaySmall,
-          ),
-          actions: [
-            SizedBox(
-                height: 80,
-                width: 80,
-                child: Image.asset('assets/images/GDSC-Logo2.png')),
-          ],
-        ),
-        body: ListView.builder(
-          shrinkWrap: true,
-          itemCount: teamMembers.length,
-          itemBuilder: (context, index) {
-            // Extract team member details
-            final member = teamMembers[index];
-            return ListTile(
-              trailing: GestureDetector(
-                  onTap: () {
-                    openAppWebView(member.connectLink);
-                  },
-                  child: Text('Connect',
-                      style: Theme.of(context).textTheme.displaySmall)),
-              leading: CircleAvatar(
-                backgroundImage: NetworkImage(member.imageUrl),
-              ),
-              title: Text(member.name),
-              subtitle: Text(member.position),
-            );
-          },
-        ),
-      ),
-    );
+    throw UnimplementedError();
   }
 }

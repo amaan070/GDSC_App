@@ -16,7 +16,7 @@ class _ProfilePageState extends State<ProfilePage> {
   final currentUser = FirebaseAuth.instance.currentUser;
   final usersCollection = FirebaseFirestore.instance.collection('users');
 
-  Future<void> editField(String field) async {
+  Future<void> editField(String field, int maxLength) async {
     String newValue = '';
     await showDialog(
         context: context,
@@ -27,6 +27,7 @@ class _ProfilePageState extends State<ProfilePage> {
                 style: Theme.of(context).textTheme.displaySmall,
               ),
               content: TextField(
+                maxLength: maxLength,
                 autofocus: true,
                 decoration: InputDecoration(
                   hintText: 'Enter the new $field',
@@ -123,17 +124,17 @@ class _ProfilePageState extends State<ProfilePage> {
                       TextBox(
                         text: userData['name'],
                         sectionName: 'Username',
-                        onPressed: () => editField('name'),
+                        onPressed: () => editField('name', 50),
                       ),
                       TextBox(
                         text: userData['phone number'],
                         sectionName: 'Phone Number',
-                        onPressed: () => editField('phone number'),
+                        onPressed: () => editField('phone number', 10),
                       ),
                       TextBox(
                         text: userData['age'],
                         sectionName: 'Age',
-                        onPressed: () => editField('age'),
+                        onPressed: () => editField('age', 2),
                       ),
                       const SizedBox(
                         height: 50,

@@ -3,6 +3,7 @@
 // import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:email_validator/email_validator.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:gdsc_app/src/services/firebase/firebase_functions.dart';
 
 class SignupForm extends StatefulWidget {
@@ -28,15 +29,6 @@ class _SignupFormState extends State<SignupForm> {
     isObscured = true;
     super.initState();
   }
-
-  // Future addUserDetails() async {
-  //   await FirebaseFirestore.instance.collection('users').add({
-  //     'name': usernameController.text.trim(),
-  //     'age': int.parse(ageController.text.trim()),
-  //     'email': emailController.text.trim(),
-  //     'phone number': int.parse(phoneNumberController.text.trim()),
-  //   });
-  // }
 
   @override
   Widget build(BuildContext context) {
@@ -77,6 +69,7 @@ class _SignupFormState extends State<SignupForm> {
               height: 10,
             ),
             TextFormField(
+              maxLength: 2,
               controller: ageController,
               decoration: const InputDecoration(
                 prefixIcon: Icon(Icons.data_object),
@@ -89,6 +82,7 @@ class _SignupFormState extends State<SignupForm> {
               height: 10,
             ),
             TextFormField(
+              maxLength: 10,
               controller: phoneNumberController,
               decoration: const InputDecoration(
                 prefixIcon: Icon(Icons.numbers),
