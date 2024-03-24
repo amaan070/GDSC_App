@@ -4,7 +4,6 @@ import 'package:gdsc_app/src/pages/chat_bot.dart';
 import 'package:gdsc_app/src/pages/events.dart';
 import 'package:gdsc_app/src/pages/home.dart';
 import 'package:gdsc_app/src/pages/profile_page.dart';
-import 'package:gdsc_app/src/pages/team.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class BottomNavigator extends StatefulWidget {
