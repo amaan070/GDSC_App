@@ -17,11 +17,6 @@ class PhoneReset extends StatelessWidget {
       ),
       body: Container(
         color: Theme.of(context).colorScheme.background,
-        // decoration: const BoxDecoration(
-        //     gradient: LinearGradient(
-        //         colors: [themeBackgroundPeach, themeBackgroundWhite],
-        //         begin: Alignment.topLeft,
-        //         end: Alignment.bottomRight)),
         padding: const EdgeInsets.all(20.0),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,

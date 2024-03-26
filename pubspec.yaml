@@ -50,6 +50,7 @@ dependencies:
   font_awesome_flutter: ^10.7.0
   google_generative_ai: ^0.2.2
   flutter_launcher_icons: ^0.13.1
+  image_picker: ^1.0.7
 
 dev_dependencies:
   flutter_test:
@@ -95,6 +96,12 @@ flutter:
     - assets/images/team.jpg
     - assets/images/upcomingEvents.jpg
     - assets/images/cuate.png
+    - assets/images/Event1.png
+    - assets/images/Event2.png
+    - assets/images/Event3.png
+    - assets/images/Event4.png
+    - assets/images/Event5.png
+
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware

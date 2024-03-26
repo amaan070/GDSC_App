@@ -22,7 +22,7 @@ class _BottomNavigatorState extends State<BottomNavigator> {
     const EventsPage(),
     const AboutUsPage(),
     const ChatScreen(),
-    const ProfilePage(),
+    const ProfilePage()
   ];
 
   @override

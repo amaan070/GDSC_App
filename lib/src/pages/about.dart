@@ -24,7 +24,10 @@ class AboutUsPage extends StatelessWidget {
           leading: const Icon(Icons.pages),
           title: Text(
             'GDSC ZHCET',
-            style: Theme.of(context).textTheme.displaySmall,
+            style: Theme.of(context)
+                .textTheme
+                .displayLarge!
+                .copyWith(fontSize: 20),
           ),
           actions: [
             SizedBox(
@@ -93,26 +96,29 @@ class AboutUsPage extends StatelessWidget {
                 style: Theme.of(context).textTheme.displayLarge,
               ),
               const SizedBox(height: 10.0),
-              ListView.builder(
-                shrinkWrap: true,
-                itemCount: TeamPage().teamMembers.length,
-                itemBuilder: (context, index) {
-                  // Extract team member details
-                  final member = TeamPage().teamMembers[index];
-                  return ListTile(
-                    trailing: GestureDetector(
-                        onTap: () {
-                          openAppWebView(member.connectLink);
-                        },
-                        child: Text('Connect',
-                            style: Theme.of(context).textTheme.displaySmall)),
-                    leading: CircleAvatar(
-                      backgroundImage: NetworkImage(member.imageUrl),
-                    ),
-                    title: Text(member.name),
-                    subtitle: Text(member.position),
-                  );
-                },
+              SizedBox(
+                height: 390,
+                child: ListView.builder(
+                  shrinkWrap: true,
+                  itemCount: TeamPage().teamMembers.length,
+                  itemBuilder: (context, index) {
+                    // Extract team member details
+                    final member = TeamPage().teamMembers[index];
+                    return ListTile(
+                      trailing: GestureDetector(
+                          onTap: () {
+                            openAppWebView(member.connectLink);
+                          },
+                          child: Text('Connect',
+                              style: Theme.of(context).textTheme.displaySmall)),
+                      leading: CircleAvatar(
+                        backgroundImage: NetworkImage(member.imageUrl),
+                      ),
+                      title: Text(member.name),
+                      subtitle: Text(member.position),
+                    );
+                  },
+                ),
               ),
               const SizedBox(height: 20.0),
               Text(

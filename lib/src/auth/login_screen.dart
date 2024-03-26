@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:gdsc_app/src/services/functions/google_authentication/google_authentication.dart';
+import 'package:gdsc_app/src/services/firebase/firebase_functions.dart';
 import 'package:gdsc_app/src/services/models/login_form.dart';
 import 'package:gdsc_app/src/auth/signup_screen.dart';
 
@@ -47,7 +47,7 @@ class LoginScreen extends StatelessWidget {
                 OutlinedButton.icon(
                     icon: Image.asset('assets/images/google.png'),
                     onPressed: () {
-                      FirebaseService.signInwithGoogle(context);
+                      signInwithGoogle(context);
                     },
                     label: const Text('Sign-in with Google')),
                 const SizedBox(

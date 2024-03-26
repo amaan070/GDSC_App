@@ -3,9 +3,14 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:gdsc_app/src/auth/create_profile.dart';
+import 'package:gdsc_app/src/auth/welcome_screen.dart';
 import 'package:gdsc_app/src/pages/bottom_navigation.dart';
 import 'package:gdsc_app/src/auth/email_verification/email_verification.dart';
-// import 'package:gdsc_app/src/features/authentication/screens/login_screen.dart';
+import 'package:google_sign_in/google_sign_in.dart';
+
+final FirebaseAuth _auth = FirebaseAuth.instance;
+final GoogleSignIn _googleSignIn = GoogleSignIn();
 
 createUserWithEmailAndPassword(
     String emailAddress,
@@ -116,8 +121,47 @@ passwordReset(String emailAddress, BuildContext context) async {
   }
 }
 
+Future<String?> signInwithGoogle(BuildContext context) async {
+  try {
+    final GoogleSignInAccount? googleSignInAccount =
+        await _googleSignIn.signIn();
+    final GoogleSignInAuthentication googleSignInAuthentication =
+        await googleSignInAccount!.authentication;
+    final AuthCredential credential = GoogleAuthProvider.credential(
+      accessToken: googleSignInAuthentication.accessToken,
+      idToken: googleSignInAuthentication.idToken,
+    );
+    final UserCredential authResult =
+        await FirebaseAuth.instance.signInWithCredential(credential);
+
+    final additionalUserInfo = authResult.additionalUserInfo;
+    if (additionalUserInfo != null && additionalUserInfo.isNewUser) {
+      Navigator.push(context,
+          MaterialPageRoute(builder: (context) => const CreateProfile()));
+    } else {
+      Navigator.push(context,
+          MaterialPageRoute(builder: (context) => const BottomNavigator()));
+      ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+        content: Text('Logged into your account successfully.'),
+        backgroundColor: Color.fromARGB(255, 23, 154, 27),
+      ));
+    }
+    await _auth.signInWithCredential(credential);
+  } on FirebaseAuthException catch (e) {
+    (e.message);
+    rethrow;
+  }
+  return null;
+}
+
 //sign out method
 signOut(BuildContext context) async {
   await FirebaseAuth.instance.signOut();
-  Navigator.pop(context);
+  Navigator.push(
+      context, MaterialPageRoute(builder: (context) => const WelcomeScreen()));
+}
+
+Future<void> signOutFromGoogle() async {
+  await _googleSignIn.signOut();
+  await _auth.signOut();
 }

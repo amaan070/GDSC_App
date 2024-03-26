@@ -31,7 +31,7 @@ class HorizontalScroll extends StatelessWidget {
         child: Container(
           decoration: BoxDecoration(
               image: DecorationImage(
-                  image: NetworkImage(imageUrl), fit: BoxFit.fitHeight),
+                  image: AssetImage(imageUrl), fit: BoxFit.fill),
               borderRadius: BorderRadius.circular(20),
               color: Theme.of(context).colorScheme.background),
           padding: const EdgeInsets.all(20),

@@ -1,9 +1,10 @@
+import 'dart:io';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:gdsc_app/src/services/firebase/firebase_functions.dart';
-import 'package:gdsc_app/src/services/functions/google_authentication/google_authentication.dart';
 import 'package:gdsc_app/src/widgets/global/text_box.dart';
+import 'package:image_picker/image_picker.dart';
 
 class ProfilePage extends StatefulWidget {
   const ProfilePage({super.key});
@@ -15,6 +16,21 @@ class ProfilePage extends StatefulWidget {
 class _ProfilePageState extends State<ProfilePage> {
   final currentUser = FirebaseAuth.instance.currentUser;
   final usersCollection = FirebaseFirestore.instance.collection('users');
+
+  File? _image;
+  final picker = ImagePicker();
+
+  Future getImage() async {
+    final pickedImage = await picker.pickImage(source: ImageSource.gallery);
+
+    setState(() {
+      if (pickedImage != null) {
+        _image = File(pickedImage.path);
+      } else {
+        print('no image');
+      }
+    });
+  }
 
   Future<void> editField(String field, int maxLength) async {
     String newValue = '';
@@ -66,7 +82,6 @@ class _ProfilePageState extends State<ProfilePage> {
       child: Scaffold(
           backgroundColor: Theme.of(context).colorScheme.background,
           appBar: AppBar(
-            centerTitle: true,
             backgroundColor: Theme.of(context).colorScheme.background,
             leading: const Icon(Icons.pages),
             title: Text(
@@ -78,9 +93,10 @@ class _ProfilePageState extends State<ProfilePage> {
             ),
             actions: [
               SizedBox(
-                  height: 80,
-                  width: 80,
-                  child: Image.asset('assets/images/GDSC-Logo2.png')),
+                height: 80,
+                width: 80,
+                child: Image.asset('assets/images/GDSC-Logo2.png'),
+              ),
             ],
           ),
           body: StreamBuilder<DocumentSnapshot>(
@@ -94,24 +110,42 @@ class _ProfilePageState extends State<ProfilePage> {
                   child: ListView(
                     children: [
                       const SizedBox(
-                        height: 30,
+                        height: 20,
                       ),
-                      //profile pic
-                      CircleAvatar(
-                        radius: 70,
-                      ),
-                      const SizedBox(
-                        height: 15,
-                      ),
-                      //user Email
                       Text(
                         textAlign: TextAlign.center,
                         currentUser!.email!,
                         style: const TextStyle(
                             fontSize: 15, fontWeight: FontWeight.bold),
                       ),
+                      //profile pic
                       const SizedBox(
-                        height: 30,
+                        height: 15,
+                      ),
+                      CircleAvatar(
+                        radius: 90,
+                        backgroundImage:
+                            _image != null ? FileImage(_image!) : null,
+                        child: _image == null
+                            ? FloatingActionButton(
+                                child: const Icon(Icons.add),
+                                onPressed: () {
+                                  getImage();
+                                },
+                              )
+                            : null,
+                      ),
+                      const SizedBox(
+                        height: 10,
+                      ),
+                      OutlinedButton(
+                          onPressed: () {
+                            getImage();
+                          },
+                          child: const Text('Change Image')),
+                      //user Email
+                      const SizedBox(
+                        height: 20,
                       ),
                       Text(
                         'My Profile',
@@ -120,7 +154,6 @@ class _ProfilePageState extends State<ProfilePage> {
                             .displayLarge!
                             .copyWith(fontSize: 20),
                       ),
-
                       TextBox(
                         text: userData['name'],
                         sectionName: 'Username',
@@ -137,7 +170,7 @@ class _ProfilePageState extends State<ProfilePage> {
                         onPressed: () => editField('age', 2),
                       ),
                       const SizedBox(
-                        height: 50,
+                        height: 15,
                       ),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.center,
@@ -151,7 +184,7 @@ class _ProfilePageState extends State<ProfilePage> {
                                   shape: const CircleBorder()),
                               onPressed: () {
                                 signOut(context);
-                                FirebaseService.signOutFromGoogle();
+                                signOutFromGoogle();
                                 ScaffoldMessenger.of(context)
                                     .showSnackBar(const SnackBar(
                                   content: Text('Logged out!'),
@@ -159,7 +192,7 @@ class _ProfilePageState extends State<ProfilePage> {
                                       Color.fromARGB(255, 210, 36, 23),
                                 ));
                               },
-                              child: Icon(Icons.logout)),
+                              child: const Icon(Icons.logout)),
                         ],
                       )
                     ],

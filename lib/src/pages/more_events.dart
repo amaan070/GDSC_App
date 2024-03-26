@@ -207,7 +207,7 @@ class MoreEvents extends StatelessWidget {
                 onTap: () {
                   openAppWebView(event.link);
                 },
-                child: Icon(Icons.link_sharp)),
+                child: const Icon(Icons.link_sharp)),
           );
         },
       ),

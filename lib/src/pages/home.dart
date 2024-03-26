@@ -54,8 +54,8 @@ class _MyHomePageState extends State<MyHomePage> {
             'GDSC',
             style: Theme.of(context)
                 .textTheme
-                .displaySmall!
-                .copyWith(fontWeight: FontWeight.bold),
+                .displayLarge!
+                .copyWith(fontSize: 20),
           ),
           elevation: 0,
           backgroundColor: Colors.transparent,
@@ -127,8 +127,7 @@ class _MyHomePageState extends State<MyHomePage> {
                     children: [
                       HorizontalScroll(
                         textTheme: textTheme,
-                        imageUrl:
-                            'https://res.cloudinary.com/startup-grind/image/upload/c_scale,w_2560/c_crop,h_640,w_2560,y_0.0_mul_h_sub_0.0_mul_640/c_crop,h_640,w_2560/c_fill,dpr_2.0,f_auto,g_center,q_auto:good/v1/gcs/platform-data-dsc/event_banners/GDE%20flutter%20sessinnn.png',
+                        imageUrl: 'assets/images/Event1.png',
                         link:
                             'https://gdsc.community.dev/events/details/developer-student-clubs-zakir-husain-college-of-engineering-and-technology-aligarh-presents-getting-started-with-flutter-by-google-developer-expert-for-flutter-amp-dart/',
                       ),
@@ -137,8 +136,7 @@ class _MyHomePageState extends State<MyHomePage> {
                       ),
                       HorizontalScroll(
                         textTheme: textTheme,
-                        imageUrl:
-                            'https://res.cloudinary.com/startup-grind/image/upload/c_scale,w_2560/c_crop,h_640,w_2560,y_0.0_mul_h_sub_0.0_mul_640/c_crop,h_640,w_2560/c_fill,dpr_2.0,f_auto,g_center,q_auto:good/v1/gcs/platform-data-dsc/event_banners/AI%20session%20GDSChh.png',
+                        imageUrl: 'assets/images/Event2.png',
                         link:
                             'https://gdsc.community.dev/events/details/developer-student-clubs-zakir-husain-college-of-engineering-and-technology-aligarh-presents-speaker-session-on-aiml/',
                       ),
@@ -147,8 +145,7 @@ class _MyHomePageState extends State<MyHomePage> {
                       ),
                       HorizontalScroll(
                         textTheme: textTheme,
-                        imageUrl:
-                            'https://res.cloudinary.com/startup-grind/image/upload/c_scale,w_2560/c_crop,h_640,w_2560,y_0.0_mul_h_sub_0.0_mul_640/c_crop,h_640,w_2560/c_fill,dpr_2.0,f_auto,g_center,q_auto:good/v1/gcs/platform-data-dsc/event_banners/REGISTER%20NOW%21%20%28Facebook%20Cover%29_1XcSAwP.png',
+                        imageUrl: 'assets/images/Event3.png',
                         link:
                             'https://gdsc.community.dev/events/details/developer-student-clubs-zakir-husain-college-of-engineering-and-technology-aligarh-presents-speaker-session-with-github-campus-expert/',
                       ),

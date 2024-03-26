@@ -1,7 +1,9 @@
 // ignore_for_file: avoid_unnecessary_containers, use_build_context_synchronously
 
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:gdsc_app/src/auth/welcome_screen.dart';
+import 'package:gdsc_app/src/pages/bottom_navigation.dart';
 
 class Splash extends StatefulWidget {
   const Splash({super.key});
@@ -14,13 +16,23 @@ class _SplashState extends State<Splash> {
   @override
   void initState() {
     super.initState();
-    _navigatetoWelcomeScreen();
+    if (FirebaseAuth.instance.currentUser != null) {
+      _navigatetoHomeScreen();
+    } else {
+      _navigatetoWelcomeScreen();
+    }
   }
 
   _navigatetoWelcomeScreen() async {
     await Future.delayed(const Duration(milliseconds: 3000), () {});
     Navigator.pushReplacement(context,
         MaterialPageRoute(builder: (context) => const WelcomeScreen()));
+  }
+
+  _navigatetoHomeScreen() async {
+    await Future.delayed(const Duration(milliseconds: 3000), () {});
+    Navigator.pushReplacement(context,
+        MaterialPageRoute(builder: (context) => const BottomNavigator()));
   }
 
   @override

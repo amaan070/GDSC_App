@@ -44,26 +44,43 @@ class EventsPage extends StatelessWidget {
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text(
-                    'Past Events',
-                    style: Theme.of(context)
-                        .textTheme
-                        .displaySmall!
-                        .copyWith(fontSize: 25),
+                  const SizedBox(
+                    height: 20,
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text(
+                        'Past Events',
+                        style: Theme.of(context)
+                            .textTheme
+                            .displaySmall!
+                            .copyWith(fontSize: 25),
+                      ),
+                      GestureDetector(
+                        onTap: () => Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => MoreEvents())),
+                        child: Text(
+                          'More',
+                          style: textTheme.displaySmall!.copyWith(fontSize: 20),
+                        ),
+                      )
+                    ],
                   ),
                   const SizedBox(
-                    height: 10,
+                    height: 20,
                   ),
                   SizedBox(
-                    height: 315,
+                    height: 260,
                     child: ListView(
                       shrinkWrap: true,
                       scrollDirection: Axis.horizontal,
                       children: [
                         HorizontalScroll(
                           textTheme: textTheme,
-                          imageUrl:
-                              'https://res.cloudinary.com/startup-grind/image/upload/c_scale,w_2560/c_crop,h_640,w_2560,y_0.0_mul_h_sub_0.0_mul_640/c_crop,h_640,w_2560/c_fill,dpr_2.0,f_auto,g_center,q_auto:good/v1/gcs/platform-data-dsc/event_banners/GDE%20flutter%20sessinnn.png',
+                          imageUrl: 'assets/images/Event1.png',
                           link:
                               'https://gdsc.community.dev/events/details/developer-student-clubs-zakir-husain-college-of-engineering-and-technology-aligarh-presents-getting-started-with-flutter-by-google-developer-expert-for-flutter-amp-dart/',
                         ),
@@ -72,8 +89,7 @@ class EventsPage extends StatelessWidget {
                         ),
                         HorizontalScroll(
                           textTheme: textTheme,
-                          imageUrl:
-                              'https://res.cloudinary.com/startup-grind/image/upload/c_scale,w_2560/c_crop,h_640,w_2560,y_0.0_mul_h_sub_0.0_mul_640/c_crop,h_640,w_2560/c_fill,dpr_2.0,f_auto,g_center,q_auto:good/v1/gcs/platform-data-dsc/event_banners/AI%20session%20GDSChh.png',
+                          imageUrl: 'assets/images/Event2.png',
                           link:
                               'https://gdsc.community.dev/events/details/developer-student-clubs-zakir-husain-college-of-engineering-and-technology-aligarh-presents-speaker-session-on-aiml/',
                         ),
@@ -82,8 +98,7 @@ class EventsPage extends StatelessWidget {
                         ),
                         HorizontalScroll(
                           textTheme: textTheme,
-                          imageUrl:
-                              'https://res.cloudinary.com/startup-grind/image/upload/c_scale,w_2560/c_crop,h_640,w_2560,y_0.0_mul_h_sub_0.0_mul_640/c_crop,h_640,w_2560/c_fill,dpr_2.0,f_auto,g_center,q_auto:good/v1/gcs/platform-data-dsc/event_banners/REGISTER%20NOW%21%20%28Facebook%20Cover%29_1XcSAwP.png',
+                          imageUrl: 'assets/images/Event3.png',
                           link:
                               'https://gdsc.community.dev/events/details/developer-student-clubs-zakir-husain-college-of-engineering-and-technology-aligarh-presents-speaker-session-with-github-campus-expert/',
                         ),
@@ -92,43 +107,18 @@ class EventsPage extends StatelessWidget {
                         ),
                         HorizontalScroll(
                           textTheme: textTheme,
-                          imageUrl:
-                              'https://res.cloudinary.com/startup-grind/image/upload/c_scale,w_2560/c_crop,h_640,w_2560,y_0.0_mul_h_sub_0.0_mul_640/c_crop,h_640,w_2560/c_fill,dpr_2.0,f_auto,g_center,q_auto:good/v1/gcs/platform-data-dsc/event_banners/Untitled%201.png',
+                          imageUrl: 'assets/images/Event4.png',
                           link:
                               'https://gdsc.community.dev/events/details/developer-student-clubs-zakir-husain-college-of-engineering-and-technology-aligarh-presents-machine-learning-workshop-1/',
                         ),
                         const SizedBox(
                           width: 10,
                         ),
-                        Column(
-                          crossAxisAlignment: CrossAxisAlignment.end,
-                          children: [
-                            GestureDetector(
-                              onTap: () {
-                                Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                        builder: (context) => MoreEvents()));
-                              },
-                              child: Text(
-                                'More',
-                                style: textTheme.displaySmall,
-                              ),
-                            ),
-                            const SizedBox(
-                              height: 5,
-                            ),
-                            HorizontalScroll(
-                              textTheme: textTheme,
-                              imageUrl:
-                                  'https://res.cloudinary.com/startup-grind/image/upload/c_scale,w_2560/c_crop,h_640,w_2560,y_0.0_mul_h_sub_0.0_mul_640/c_crop,h_640,w_2560/c_fill,dpr_2.0,f_auto,g_center,q_auto:good/v1/gcs/platform-data-dsc/event_banners/REGISTER%20NOW%21%20%28Facebook%20Cover%29_V79c4Xq.png',
-                              link:
-                                  'https://gdsc.community.dev/events/details/developer-student-clubs-zakir-husain-college-of-engineering-and-technology-aligarh-presents-android-development-workshop/',
-                            ),
-                          ],
-                        ),
-                        const SizedBox(
-                          width: 10,
+                        HorizontalScroll(
+                          textTheme: textTheme,
+                          imageUrl: 'assets/images/Event5.png',
+                          link:
+                              'https://gdsc.community.dev/events/details/developer-student-clubs-zakir-husain-college-of-engineering-and-technology-aligarh-presents-android-development-workshop/',
                         ),
                       ],
                     ),
@@ -136,7 +126,7 @@ class EventsPage extends StatelessWidget {
                 ],
               ),
               const SizedBox(
-                height: 30,
+                height: 40,
               ),
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -149,7 +139,7 @@ class EventsPage extends StatelessWidget {
                         .copyWith(fontSize: 25),
                   ),
                   const SizedBox(
-                    height: 10,
+                    height: 20,
                   ),
                   GestureDetector(
                     onTap: () {
