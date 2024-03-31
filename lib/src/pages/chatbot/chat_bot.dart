@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:google_generative_ai/google_generative_ai.dart';
-import 'package:provider/provider.dart';
 
 class ChatScreen extends StatelessWidget {
   const ChatScreen({super.key});
