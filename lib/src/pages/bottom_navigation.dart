@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:gdsc_app/src/pages/about.dart';
-import 'package:gdsc_app/src/pages/chat_bot.dart';
+import 'package:gdsc_app/src/pages/chatbot/chat_bot.dart';
 import 'package:gdsc_app/src/pages/events.dart';
 import 'package:gdsc_app/src/pages/home.dart';
 import 'package:gdsc_app/src/pages/profile_page.dart';
@@ -30,52 +30,54 @@ class _BottomNavigatorState extends State<BottomNavigator> {
     return PopScope(
       canPop: false,
       child: Scaffold(
-        bottomNavigationBar: BottomNavigationBar(
-            onTap: (index) {
-              setState(() {
-                myIndex = index;
-              });
-            },
-            currentIndex: myIndex,
-            items: [
-              BottomNavigationBarItem(
-                  icon: Icon(
-                    FontAwesomeIcons.house,
-                    color: Theme.of(context).colorScheme.primary,
-                  ),
-                  label: '',
-                  backgroundColor: Colors.transparent),
-              BottomNavigationBarItem(
-                  icon: Icon(
-                    FontAwesomeIcons.book,
-                    color: Theme.of(context).colorScheme.primary,
-                  ),
-                  label: '',
-                  backgroundColor: Colors.transparent),
-              BottomNavigationBarItem(
-                  icon: Icon(
-                    FontAwesomeIcons.circleInfo,
-                    color: Theme.of(context).colorScheme.primary,
-                  ),
-                  label: '',
-                  backgroundColor: Colors.transparent),
-              BottomNavigationBarItem(
-                  icon: Icon(
-                    FontAwesomeIcons.message,
-                    color: Theme.of(context).colorScheme.primary,
-                  ),
-                  label: '',
-                  backgroundColor: Colors.transparent),
-              BottomNavigationBarItem(
-                  icon: Icon(
-                    FontAwesomeIcons.user,
-                    color: Theme.of(context).colorScheme.primary,
-                  ),
-                  label: '',
-                  backgroundColor: Colors.transparent),
-            ]),
-        body: pages[myIndex],
-      ),
+          bottomNavigationBar: BottomNavigationBar(
+              onTap: (index) {
+                setState(() {
+                  myIndex = index;
+                });
+              },
+              currentIndex: myIndex,
+              items: [
+                BottomNavigationBarItem(
+                    icon: Icon(
+                      FontAwesomeIcons.house,
+                      color: Theme.of(context).colorScheme.primary,
+                    ),
+                    label: '',
+                    backgroundColor: Colors.transparent),
+                BottomNavigationBarItem(
+                    icon: Icon(
+                      FontAwesomeIcons.book,
+                      color: Theme.of(context).colorScheme.primary,
+                    ),
+                    label: '',
+                    backgroundColor: Colors.transparent),
+                BottomNavigationBarItem(
+                    icon: Icon(
+                      FontAwesomeIcons.circleInfo,
+                      color: Theme.of(context).colorScheme.primary,
+                    ),
+                    label: '',
+                    backgroundColor: Colors.transparent),
+                BottomNavigationBarItem(
+                    icon: Icon(
+                      FontAwesomeIcons.message,
+                      color: Theme.of(context).colorScheme.primary,
+                    ),
+                    label: '',
+                    backgroundColor: Colors.transparent),
+                BottomNavigationBarItem(
+                    icon: Icon(
+                      FontAwesomeIcons.user,
+                      color: Theme.of(context).colorScheme.primary,
+                    ),
+                    label: '',
+                    backgroundColor: Colors.transparent),
+              ]),
+          body: IndexedStack(
+            index: myIndex,
+            children: pages,
+          )),
     );
   }
 }

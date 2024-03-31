@@ -22,11 +22,14 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MultiProvider(
-      providers: [ChangeNotifierProvider(create: (_) => ThemeChanger())],
+      providers: [
+        ChangeNotifierProvider(create: (_) => ThemeChanger()),
+        // ChangeNotifierProvider(create: (_) => ChatbotData())
+      ],
       child: Builder(builder: ((context) {
         final themeChanger = Provider.of<ThemeChanger>(context);
         return MaterialApp(
-          title: 'Flutter Demo',
+          title: 'GDSC ZHCET',
           themeMode: themeChanger.themeMode,
           theme: defaultTheme,
           darkTheme: darkTheme,

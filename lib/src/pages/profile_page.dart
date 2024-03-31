@@ -1,6 +1,7 @@
 import 'dart:io';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:gdsc_app/src/services/firebase/firebase_functions.dart';
 import 'package:gdsc_app/src/widgets/global/text_box.dart';
@@ -18,18 +19,56 @@ class _ProfilePageState extends State<ProfilePage> {
   final usersCollection = FirebaseFirestore.instance.collection('users');
 
   File? _image;
+  NetworkImage? img;
   final picker = ImagePicker();
+
+  @override
+  void initState() {
+    super.initState();
+    checkIfImageExists();
+  }
 
   Future getImage() async {
     final pickedImage = await picker.pickImage(source: ImageSource.gallery);
 
-    setState(() {
+    setState(() async {
       if (pickedImage != null) {
         _image = File(pickedImage.path);
+        bool success = await uploadFileForUser(_image!);
+        print(success);
+        checkIfImageExists();
       } else {
         print('no image');
       }
     });
+  }
+
+  Future<bool> uploadFileForUser(File file) async {
+    try {
+      final userEmail = FirebaseAuth.instance.currentUser!.email;
+      final storageRef = FirebaseStorage.instance.ref();
+      final uploadRef = storageRef.child("$userEmail/uploads/profileImage.jpg");
+      await uploadRef.putFile(file);
+      return true;
+    } catch (e) {
+      print(e);
+    } finally {}
+    return false;
+  }
+
+  Future<void> checkIfImageExists() async {
+    try {
+      final userEmail = FirebaseAuth.instance.currentUser!.email;
+      final ref = FirebaseStorage.instance
+          .ref()
+          .child("$userEmail/uploads/profileImage.jpg");
+      final String downloadUrl = await ref.getDownloadURL();
+      setState(() {
+        img = NetworkImage(downloadUrl);
+      });
+    } catch (e) {
+      print('Error checking image: $e');
+    } finally {}
   }
 
   Future<void> editField(String field, int maxLength) async {
@@ -112,11 +151,16 @@ class _ProfilePageState extends State<ProfilePage> {
                       const SizedBox(
                         height: 20,
                       ),
-                      Text(
-                        textAlign: TextAlign.center,
-                        currentUser!.email!,
-                        style: const TextStyle(
-                            fontSize: 15, fontWeight: FontWeight.bold),
+                      Container(
+                        decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(8),
+                            color: Theme.of(context).colorScheme.secondary),
+                        child: Text(
+                          textAlign: TextAlign.center,
+                          currentUser!.email!,
+                          style: const TextStyle(
+                              fontSize: 15, fontWeight: FontWeight.bold),
+                        ),
                       ),
                       //profile pic
                       const SizedBox(
@@ -124,9 +168,8 @@ class _ProfilePageState extends State<ProfilePage> {
                       ),
                       CircleAvatar(
                         radius: 90,
-                        backgroundImage:
-                            _image != null ? FileImage(_image!) : null,
-                        child: _image == null
+                        backgroundImage: img == null ? null : img,
+                        child: img == null
                             ? FloatingActionButton(
                                 child: const Icon(Icons.add),
                                 onPressed: () {
@@ -138,11 +181,31 @@ class _ProfilePageState extends State<ProfilePage> {
                       const SizedBox(
                         height: 10,
                       ),
-                      OutlinedButton(
-                          onPressed: () {
-                            getImage();
-                          },
-                          child: const Text('Change Image')),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          GestureDetector(
+                            child: const Icon(
+                              Icons.change_circle_outlined,
+                              size: 30,
+                            ),
+                            onTap: () => getImage(),
+                          ),
+                          const SizedBox(
+                            width: 5,
+                          ),
+                          GestureDetector(
+                            child: Text(
+                              'Change Image',
+                              style: Theme.of(context)
+                                  .textTheme
+                                  .displaySmall!
+                                  .copyWith(fontSize: 12.5),
+                            ),
+                            onTap: () => getImage(),
+                          ),
+                        ],
+                      ),
                       //user Email
                       const SizedBox(
                         height: 20,
