@@ -1,1 +1,1 @@
-# Login-Signup-App
+# GDSC-App
