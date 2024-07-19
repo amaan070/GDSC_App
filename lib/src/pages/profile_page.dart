@@ -131,10 +131,20 @@ class _ProfilePageState extends State<ProfilePage> {
                   .copyWith(fontSize: 20),
             ),
             actions: [
-              SizedBox(
-                height: 80,
-                width: 80,
-                child: Image.asset('assets/images/GDSC-Logo2.png'),
+              GestureDetector(
+                onTap: () {
+                  signOut(context);
+                  signOutFromGoogle();
+                  ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+                    content: Text('Logged out!'),
+                    backgroundColor: Color.fromARGB(255, 210, 36, 23),
+                  ));
+                },
+                child: SizedBox(
+                  height: 80,
+                  width: 80,
+                  child: Image.asset('assets/images/GDSC-Logo2.png'),
+                ),
               ),
             ],
           ),
